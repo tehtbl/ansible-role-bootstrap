@@ -39,7 +39,7 @@ install:
 script:
   - export PY_VERSION="py${TRAVIS_PYTHON_VERSION//.}"
   - echo "${PY_VERSION}"
-  - tox -e "py${PY_VERSION}-ansible-{previous,current,next}" --parallel all
+  - tox -e "${PY_VERSION}-ansible-{previous,current,next}" --parallel all
 
 # notifications:
 #   webhooks: https://galaxy.ansible.com/api/v1/notifications/
