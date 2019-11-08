@@ -21,7 +21,7 @@ This example is taken from `molecule/resources/playbook.yml`:
 # ------------------------------------------------------------------------
 # bootstrap your hosts
 # ------------------------------------------------------------------------
-- name: Test
+- name: Converge
   hosts: all
   become: yes
   gather_facts: no
@@ -172,4 +172,4 @@ Sources
 
 This work is based on the great work of many people, e.g.
 [robertdebock](https://github.com/robertdebock) and
-(geerlingguy)[https://github.com/geerlingguy]
+[geerlingguy](https://github.com/geerlingguy)
