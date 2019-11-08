@@ -1,44 +1,59 @@
 ---
 language: python
+services: docker
 
 python:
   - "3.5"
   - "3.6"
   - "3.7"
 
-services:
-  - docker
-
 env:
   global:
-    namespace="tehtbl"
+    - role_name: bootstrap
+    - namespace: "tehtbl"
   matrix:
-    - image="alpine" tag="3.9"
-    - image="alpine" tag="latest"
-    - image="alpine" tag="edge"
-    - image="debian" tag="stable"
-    - image="debian" tag="testing"
-    - image="debian" tag="unstable"
-    - image="ubuntu" tag="xenial"
+    # - image="alpine" tag="3.9"
+    # # - image="alpine" tag="latest"
+    # # - image="alpine" tag="edge"
+    # # - image="debian" tag="stable"
+    # - image="debian" tag="testing"
+    # - image="debian" tag="unstable"
+    # # - image="ubuntu" tag="xenial"
+    # - image="ubuntu" tag="bionic"
+    # # - image="ubuntu" tag="devel"
     - image="ubuntu" tag="bionic"
-    - image="ubuntu" tag="devel"
 
-matrix:
-  allow_failures:
-    - env: image="alpine" tag="edge"
-    - env: image="debian" tag="unstable"
-    - env: image="ubuntu" tag="devel"
-
-cache:
-  - pip
+# matrix:
+#   allow_failures:
+#     - env: image="alpine" tag="edge"
+#     - env: image="debian" tag="unstable"
+#     - env: image="ubuntu" tag="devel"
+#
+# cache:
+#   - pip
+#
+# install:
+#   - pip install --upgrade pip
+#   - pip install tox
+#   - pip install molecule docker
+#
+# script:
+#   - tox --parallel all
 
 install:
-  - pip install --upgrade pip
-  - pip install tox
+  # Install test dependencies.
+  - pip install molecule docker
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible-role-${role_name} ${namespace}.${role_name}
+  - cd ${namespace}.${role_name}
 
 script:
-  - tox --parallel all
+  # Run tests.
+  - molecule test
 
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
-  email: true
+# notifications:
+#   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+#   email: true

@@ -1,20 +1,22 @@
 ---
 dependency:
   name: galaxy
-  options:
-    role-file: requirements.yml
-
-lint:
-  name: yamllint
 
 driver:
   name: docker
 
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/default/yaml-lint.yml
+
 # image: "${namespace:-tehtbl}/${image:-ubuntu}:${tag:-bionic}"
 # TODO: create own image...
+# image: "${namespace:-robertdebock}/${image:-ubuntu}:${tag:-latest}"
+
 platforms:
-  - name: "bootstrap-${image:-ubuntu}-${tag:-latest}${TOX_ENVNAME}"
-    image: "${namespace:-robertdebock}/${image:-ubuntu}:${tag:-latest}"
+  - name: "${role_name:-no_role_name}-${image:-no_image}-${tag:-no_tag}-tox-${TOX_ENVNAME}"
+    image: "robertdebock/ubuntu:latest"
     command: /sbin/init
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
@@ -23,12 +25,15 @@ platforms:
 
 provisioner:
   name: ansible
-
-verifier:
-  name: ansible
   lint:
     name: ansible-lint
-    enabled: no
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
 
 scenario:
   name: default
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
