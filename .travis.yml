@@ -5,9 +5,8 @@ python: "3.7"
 
 env:
   global:
-    - ROLE_NAME: bootstrap
-    - PY_VERSION: py${TRAVIS_PYTHON_VERSION//.}
-#    - NAMESPACE: "tehtbl"
+    - ROLE_NAME: "bootstrap"
+    - PY_VERSION: "py${TRAVIS_PYTHON_VERSION//.}"
   matrix:
     - IMAGE="alpine" TAG="3.9"
     - IMAGE="alpine" TAG="latest"
@@ -19,8 +18,13 @@ env:
     - IMAGE="ubuntu" TAG="bionic"
     - IMAGE="ubuntu" TAG="devel"
 
+matrix:
+  allow_failures:
+    - env: image="alpine" tag="edge"
+    - env: image="debian" tag="unstable"
+    - env: image="ubuntu" tag="devel"
+
 install:
-#  - pip install tox molecule docker
   - pip install tox
 
 before_script:
@@ -29,9 +33,7 @@ before_script:
   - cd ${NAMESPACE}.${ROLE_NAME}
 
 script:
-#  - molecule test
   - tox -e ${PY_VERSION}
-#  --parallel all
 
 # notifications:
 #   webhooks: https://galaxy.ansible.com/api/v1/notifications/
