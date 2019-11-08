@@ -27,12 +27,13 @@ matrix:
 install:
   - pip install tox
 
-before_script:
-  - cd ../
-  - mv ansible-role-${ROLE_NAME} ${NAMESPACE}.${ROLE_NAME}
-  - cd ${NAMESPACE}.${ROLE_NAME}
+# before_script:
+#   - cd ../
+#   - mv ansible-role-${ROLE_NAME} ${NAMESPACE}.${ROLE_NAME}
+#   - cd ${NAMESPACE}.${ROLE_NAME}
 
 script:
+  - echo "${PY_VERSION}"
   - tox -e ${PY_VERSION}
 
 # notifications:
