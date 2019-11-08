@@ -2,7 +2,8 @@
 language: python
 dist: bionic
 services: docker
-python: "3.7"
+python:
+  - "3.7"
 
 env:
   global:
@@ -27,6 +28,7 @@ matrix:
     - env: image="ubuntu" tag="devel"
 
 install:
+  - pip install --upgrade pip
   - pip install tox
 
 # before_script:
@@ -37,7 +39,7 @@ install:
 script:
   - export PY_VERSION="py${TRAVIS_PYTHON_VERSION//.}"
   - echo "${PY_VERSION}"
-  - tox -e ${PY_VERSION}
+  - tox -e "py${PY_VERSION}-ansible-{previous,current,next}" --parallel all
 
 # notifications:
 #   webhooks: https://galaxy.ansible.com/api/v1/notifications/

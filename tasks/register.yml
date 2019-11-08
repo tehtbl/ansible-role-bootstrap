@@ -18,7 +18,7 @@
         - alpine.rc == 0
 
     - name: register Debian
-      raw: test -f /etc/debian_version && grep PRETTY_NAME /etc/os-release && grep "ID=debian" /etc/debian_version
+      raw: test -f /etc/debian_version && grep "ID=debian" /etc/os-release >/dev/null && grep PRETTY_NAME /etc/os-release
       register: debian
       changed_when: false
       failed_when: false
@@ -31,7 +31,7 @@
         - debian.rc == 0
 
     - name: register Ubuntu
-      raw: test -f /etc/debian_version && grep PRETTY_NAME /etc/os-release && grep "ID=ubuntu" /etc/debian_version
+      raw: test -f /etc/debian_version && grep "ID=ubuntu" /etc/os-release >/dev/null && grep PRETTY_NAME /etc/os-release
       register: ubuntu
       changed_when: false
       failed_when: false
