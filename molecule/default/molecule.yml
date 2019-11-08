@@ -1,0 +1,34 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+
+lint:
+  name: yamllint
+
+driver:
+  name: docker
+
+# image: "${namespace:-tehtbl}/${image:-ubuntu}:${tag:-bionic}"
+# TODO: create own image...
+platforms:
+  - name: "bootstrap-${image:-ubuntu}-${tag:-latest}${TOX_ENVNAME}"
+    image: "${namespace:-robertdebock}/${image:-ubuntu}:${tag:-latest}"
+    command: /sbin/init
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: yes
+    pre_build_image: yes
+
+provisioner:
+  name: ansible
+
+verifier:
+  name: ansible
+  lint:
+    name: ansible-lint
+    enabled: no
+
+scenario:
+  name: default

@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  author: gh.com/tehtbl
+  role_name: bootstrap
+  description: Prepare your Alpine/Ubuntu/Debian System for Ansible.
+  license: GNU General Public License v3.0
+  company: none
+  min_ansible_version: 2.7
+
+  platforms:
+    - name: Alpine
+      versions:
+        - 3.9
+        - latest
+        - edge
+    - name: Debian
+      versions:
+        - stable
+        - testing
+        - unstable
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+        - devel
+
+  galaxy_tags:
+    - bootstrap
+    - installer
+    - server
+    - system
+    - debian
+    - ubuntu
+    - alpine
+
+dependencies: []

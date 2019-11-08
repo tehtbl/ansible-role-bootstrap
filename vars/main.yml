@@ -1,0 +1,23 @@
+---
+# vars file for bootstrap
+bootstrap_connect: {}
+bootstrap_remote_user: "{{ (ansible_user | default(omit, true)) if bootstrap_connect is succeeded else bootstrap_user }}"
+
+# A string for each distribution and version of packages to install.
+# Because this is a bootstrap role, there are no facts. The file
+# `tasks/register.yml` discovers what distribution and version ansible
+# is running against.
+_bootstrap_packages:
+  Alpine: python3 sudo
+  Debian-8: python sudo gnupg aptitude
+  Debian-9: python sudo gnupg aptitude
+  Debian: python3 sudo gnupg python3-apt aptitude
+  Kali: python3 sudo gnupg aptitude
+  Kali GNU/Linux: python3 sudo gnupg aptitude
+  Ubuntu: python3 sudo gnupg aptitude
+
+# Map the right set of package based on values found in `tasks/register.yml`.
+bootstrap_packages: "{{ _bootstrap_packages[bootstrap_distribution ~ '-' ~ bootstrap_distribution_major_version] | default(_bootstrap_packages[bootstrap_distribution] ) }}"
+
+# Map the right set of packages, based on gathered facts.
+bootstrap_facts_packages: "{{ _bootstrap_packages[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_bootstrap_packages[ansible_distribution]) }}"
