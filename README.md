@@ -125,10 +125,10 @@ To test using the defaults (any installed Ansible version, namespace: `tehtbl`,
 molecule test
 
 # Or select a specific image:
-image=ubuntu molecule test
+IMAGE="ubuntu" molecule test
 
 # Or select a specific image and a specific tag:
-image="debian" tag="stable" tox
+IMAGE="debian" TAG="stable" tox
 ```
 
 Or you can test multiple versions of Ansible, and select images:
@@ -138,11 +138,11 @@ Tox allows multiple versions of Ansible to be tested. To run the default
 ```
 tox
 
-# To run CentOS (namespace: `tehtbl`, tag: `latest`)
-image="ubuntu" tox
+# To run Ubuntu (namespace: `tehtbl`, tag: `latest`)
+IMAGE="ubuntu" tox
 
 # Or customize more:
-image="debian" tag="stable" tox
+IMAGE="debian" TAG="stable" tox
 ```
 
 <!-- Modules

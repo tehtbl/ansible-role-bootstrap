@@ -14,7 +14,7 @@ _bootstrap_packages:
   Debian: python3 sudo gnupg python3-apt aptitude
   Kali: python3 sudo gnupg aptitude
   Kali GNU/Linux: python3 sudo gnupg aptitude
-  Ubuntu: python3 sudo gnupg aptitude
+  Ubuntu: python3 sudo gnupg aptitude python3-apt
 
 # Map the right set of package based on values found in `tasks/register.yml`.
 bootstrap_packages: "{{ _bootstrap_packages[bootstrap_distribution ~ '-' ~ bootstrap_distribution_major_version] | default(_bootstrap_packages[bootstrap_distribution] ) }}"

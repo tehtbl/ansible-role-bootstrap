@@ -2,7 +2,7 @@
 # handlers file for bootstrap
 - name: gather facts
   setup:
-  become: no
+  become: false
 
 - name: add community repository for apk
   lineinfile:

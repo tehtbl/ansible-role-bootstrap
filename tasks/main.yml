@@ -5,7 +5,7 @@
     port: "{{ ansible_port | default('22') }}"
     host: "{{ (ansible_ssh_host | default(ansible_host) | default(inventory_hostname)) }}"
   connection: local
-  become: no
+  become: false
   when:
     - ansible_connection is defined
     - ansible_connection != "docker"
@@ -18,7 +18,7 @@
       wait_for_connection:
         timeout: "{{ bootstrap_timeout }}"
       register: bootstrap_connect
-      changed_when: no
+      changed_when: false
 
   rescue:
     - name: register distribution

@@ -10,25 +10,21 @@ lint:
   options:
     config-file: molecule/default/yaml-lint.yml
 
-# image: "${namespace:-tehtbl}/${image:-ubuntu}:${tag:-bionic}"
-# TODO: create own image...
-# image: "${namespace:-robertdebock}/${image:-ubuntu}:${tag:-latest}"
-
+# TODO: build own images and put them onto docker hub
+#   image: "robertdebock/ubuntu:latest"
 platforms:
-  - name: "${role_name:-no_role_name}-${image:-no_image}-${tag:-no_tag}-tox-${TOX_ENVNAME}"
-    image: "robertdebock/ubuntu:latest"
+  - name: "${ROLE_NAME:-no_role}-${IMAGE}-${TAG:-no_tag}-${TOX_ENVNAME:-no_tox}"
+    image: "${NAMESPACE:-robertdebock}/${IMAGE:-ubuntu}:${TAG:-latest}"
     command: /sbin/init
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: yes
-    pre_build_image: yes
+    privileged: true
+    pre_build_image: true
 
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
-  playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
 
 scenario:
   name: default
