@@ -1,22 +1,23 @@
 ---
 language: python
+dist: bionic
 services: docker
 python: "3.7"
 
 env:
   global:
     - ROLE_NAME: "bootstrap"
-    - PY_VERSION: "py${TRAVIS_PYTHON_VERSION//.}"
+    # - NAMESPACE: "tehtbl"
   matrix:
-    - IMAGE="alpine" TAG="3.9"
-    - IMAGE="alpine" TAG="latest"
-    - IMAGE="alpine" TAG="edge"
-    - IMAGE="debian" TAG="stable"
-    - IMAGE="debian" TAG="testing"
-    - IMAGE="debian" TAG="unstable"
-    - IMAGE="ubuntu" TAG="xenial"
+    # - IMAGE="alpine" TAG="3.9"
+    # - IMAGE="alpine" TAG="latest"
+    # - IMAGE="alpine" TAG="edge"
+    # - IMAGE="debian" TAG="stable"
+    # - IMAGE="debian" TAG="testing"
+    # - IMAGE="debian" TAG="unstable"
+    # - IMAGE="ubuntu" TAG="xenial"
     - IMAGE="ubuntu" TAG="bionic"
-    - IMAGE="ubuntu" TAG="devel"
+    # - IMAGE="ubuntu" TAG="devel"
 
 matrix:
   allow_failures:
@@ -33,6 +34,7 @@ install:
 #   - cd ${NAMESPACE}.${ROLE_NAME}
 
 script:
+  - export PY_VERSION="py${TRAVIS_PYTHON_VERSION//.}"
   - echo "${PY_VERSION}"
   - tox -e ${PY_VERSION}
 
