@@ -7,7 +7,6 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
-  - "nightly"
 
 env:
   global:
@@ -30,7 +29,6 @@ matrix:
     - env: image="alpine" tag="edge"
     - env: image="debian" tag="unstable"
     - env: image="ubuntu" tag="devel"
-    - env: "nightly"
 
 install:
   - pip install --upgrade pip
