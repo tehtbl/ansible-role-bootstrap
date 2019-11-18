@@ -103,8 +103,8 @@ This role has been tested on these Ansible versions:
 - ansible>=2.9
 - git+https://github.com/ansible/ansible.git@devel
 
-Testing
--------
+Testing Using Tox
+-----------------
 
 [Unit tests](https://travis-ci.org/tehtbl/ansible-role-bootstrap) are done on
 every commit, pull request, release and periodically.
@@ -145,17 +145,18 @@ IMAGE="ubuntu" tox
 IMAGE="debian" TAG="stable" tox
 ```
 
-<!-- Modules
--------
+Testing Using Vagrant
+---------------------
 
-This role uses the following modules:
-```yaml
----
-- lineinfile
-- remote_user
-- setup
-- wait_for
-``` -->
+Install `vagrant` plugins via:
+```
+vagrant plugin install vagrant-reload
+```
+
+Start Tests via *VirtualBox* Provider:
+```
+vagrant up
+```
 
 License
 -------
