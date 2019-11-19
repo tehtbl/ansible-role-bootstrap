@@ -14,7 +14,7 @@ lint:
 #   image: "robertdebock/ubuntu:latest"
 platforms:
   - name: "${ROLE_NAME:-no_role}-${IMAGE}-${TAG:-no_tag}-${TOX_ENVNAME:-no_tox}"
-    image: "${NAMESPACE:-robertdebock}/${IMAGE:-ubuntu}:${TAG:-latest}"
+    image: "${NAMESPACE:-tehtbl}/${IMAGE:-ubuntu}:${TAG:-latest}"
     command: /sbin/init
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

@@ -11,7 +11,7 @@ python:
 env:
   global:
     - ROLE_NAME: "bootstrap"
-    # - NAMESPACE: "tehtbl"
+    - NAMESPACE: "tehtbl"
   matrix:
     # - IMAGE="alpine" TAG="3.9"
     # - IMAGE="alpine" TAG="latest"
@@ -19,16 +19,16 @@ env:
     # - IMAGE="debian" TAG="stable"
     # - IMAGE="debian" TAG="testing"
     # - IMAGE="debian" TAG="unstable"
-    # - IMAGE="ubuntu" TAG="xenial"
-    # - IMAGE="ubuntu" TAG="bionic"
-    # - IMAGE="ubuntu" TAG="devel"
-    - IMAGE="ubuntu" TAG="latest"
+    - IMAGE="ubuntu" TAG="xenial"
+    - IMAGE="ubuntu" TAG="bionic"
+    - IMAGE="ubuntu" TAG="devel"
+    # - IMAGE="ubuntu" TAG="latest"
 
 matrix:
   allow_failures:
-    - env: image="alpine" tag="edge"
-    - env: image="debian" tag="unstable"
-    - env: image="ubuntu" tag="devel"
+    - env: IMAGE="alpine" TAG="edge"
+    - env: IMAGE="debian" TAG="unstable"
+    - env: IMAGE="ubuntu" TAG="devel"
 
 install:
   - pip install --upgrade pip
