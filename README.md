@@ -10,7 +10,7 @@ bootstrap
 <!-- <img src="https://img.shields.io/ansible/role/d/21642"/>
 <img src="https://img.shields.io/ansible/quality/21642"/> -->
 
-Prepare your Alpine/Ubuntu/Debian System for Ansible.
+Prepare your Debian and Ubuntu Systems for Ansible.
 
 Example Playbook
 ----------------
@@ -61,13 +61,6 @@ Requirements
 - Access to a repository containing packages, likely on the internet.
 - A recent version of Ansible. (Tests run on the current, previous and next
   release of Ansible.)
-
-<!-- The following roles can be installed to ensure all requirements are met, using
-`ansible-galaxy install -r requirements.yml`:
-
-```yaml
-- none
-``` -->
 
 Context
 -------
