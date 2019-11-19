@@ -2,20 +2,16 @@
 galaxy_info:
   author: https://github.com/tehtbl
   role_name: bootstrap
-  description: Prepare your Alpine/Debian/Ubuntu System for Ansible.
+  description: Prepare your Debian and Ubuntu Systems for Ansible.
   license: GNU General Public License v3.0
   company: None
   min_ansible_version: 2.8
 
   platforms:
-    - name: Alpine
-      versions:
-        - any
     - name: Debian
       versions:
-        - jessie
-        - stretch
         - buster
+        - bullseye
         - sid
     - name: Ubuntu
       versions:
@@ -29,7 +25,6 @@ galaxy_info:
     - system
     - debian
     - ubuntu
-    - alpine
     - linux
 
 dependencies: []
