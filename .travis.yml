@@ -3,10 +3,10 @@ language: python
 dist: bionic
 services: docker
 python:
-  # - "3.5"
-  # - "3.6"
+  - "3.5"
+  - "3.6"
   - "3.7"
-  # - "3.8"
+  - "3.8"
 
 env:
   global:
@@ -14,11 +14,11 @@ env:
     - NAMESPACE: "tehtbl"
   matrix:
     - IMAGE="debian" TAG="stable"
-    # - IMAGE="debian" TAG="testing"
-    # - IMAGE="debian" TAG="unstable"
-    # - IMAGE="ubuntu" TAG="xenial"
-    # - IMAGE="ubuntu" TAG="bionic"
-    # - IMAGE="ubuntu" TAG="devel"
+    - IMAGE="debian" TAG="testing"
+    - IMAGE="debian" TAG="unstable"
+    - IMAGE="ubuntu" TAG="xenial"
+    - IMAGE="ubuntu" TAG="bionic"
+    - IMAGE="ubuntu" TAG="devel"
 
 matrix:
   allow_failures:
