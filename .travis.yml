@@ -13,31 +13,21 @@ env:
     - ROLE_NAME: "bootstrap"
     - NAMESPACE: "tehtbl"
   matrix:
-    # - IMAGE="alpine" TAG="3.9"
-    # - IMAGE="alpine" TAG="latest"
-    # - IMAGE="alpine" TAG="edge"
-    # - IMAGE="debian" TAG="stable"
-    # - IMAGE="debian" TAG="testing"
-    # - IMAGE="debian" TAG="unstable"
+    - IMAGE="debian" TAG="stable"
+    - IMAGE="debian" TAG="testing"
+    - IMAGE="debian" TAG="unstable"
     - IMAGE="ubuntu" TAG="xenial"
     - IMAGE="ubuntu" TAG="bionic"
     - IMAGE="ubuntu" TAG="devel"
-    # - IMAGE="ubuntu" TAG="latest"
 
 matrix:
   allow_failures:
-    - env: IMAGE="alpine" TAG="edge"
     - env: IMAGE="debian" TAG="unstable"
     - env: IMAGE="ubuntu" TAG="devel"
 
 install:
   - pip install --upgrade pip
   - pip install tox
-
-# before_script:
-#   - cd ../
-#   - mv ansible-role-${ROLE_NAME} ${NAMESPACE}.${ROLE_NAME}
-#   - cd ${NAMESPACE}.${ROLE_NAME}
 
 script:
   - export PY_VERSION="py${TRAVIS_PYTHON_VERSION//.}"

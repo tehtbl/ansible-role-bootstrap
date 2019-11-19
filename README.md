@@ -86,16 +86,12 @@ This role has been tested on these [container images](https://hub.docker.com/):
 
 |container|tag|allow_failures|
 |---------|---|--------------|
-|alpine|3.9|no|
-|alpine|latest|no|
-|alpine|edge|yes|
 |debian|stable|no|
 |debian|testing|no|
 |debian|unstable|yes|
 |ubuntu|xenial|no|
 |ubuntu|bionic|no|
 |ubuntu|devel|yes|
-
 
 This role has been tested on these Ansible versions:
 
