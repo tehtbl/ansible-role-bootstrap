@@ -16,8 +16,10 @@ $rolename = "ansible-role-bootstrap"
 def fs_init(user)
   return <<-EOF
     find /vagrant/#{$rolename} -name '__pycache__' -exec rm -rf {} \\; 2> /dev/null
+
     chown -R #{user} /vagrant/#{$rolename}
     touch ~#{user}/.bash_profile ; chown #{user} ~#{user}/.bash_profile
+
     echo 'export LANG=en_US.UTF-8' >> ~#{user}/.bash_profile
     echo 'export LC_CTYPE=en_US.UTF-8' >> ~#{user}/.bash_profile
     echo 'export LC_ALL=en_US.UTF-8' >> ~#{user}/.bash_profile
@@ -31,7 +33,6 @@ end
 #
 def packages_debianoid(user)
   return <<-EOF
-
     apt update
 
     # install all the (security and other) updates
@@ -49,7 +50,6 @@ def packages_debianoid(user)
 
     # for building python:
     apt install -y zlib1g-dev libbz2-dev libncurses5-dev libreadline-dev liblzma-dev libsqlite3-dev libffi-dev
-
   EOF
 end
 
@@ -74,12 +74,7 @@ end
 def install_pythons(boxname)
   return <<-EOF
     . ~/.bash_profile
-
-    # pyenv install 3.5.9
-    # pyenv install 3.6.9
     pyenv install 3.7.5rc1
-    # pyenv install 3.8.0
-
     pyenv rehash
   EOF
 end
@@ -89,29 +84,17 @@ end
 #
 def run_tests(boxname)
   return <<-EOF
-
     . ~/.bash_profile
     cd /vagrant/#{$rolename}
 
-    # pyenv global 3.5.9
-    # pip3 install tox
-    # fakeroot -u tox -e "py35-ansible-{previous,current,next}"
-
-    # pyenv global 3.6.9
-    # pip3 install tox
-    # fakeroot -u tox -e "py36-ansible-{previous,current,next}"
-
     pyenv global 3.7.5rc1
     pip3 install tox
-    fakeroot -u tox -e "py37-ansible-{previous,current,next}"
 
-    # pyenv global 3.8.0
-    # pip3 install tox
-    # fakeroot -u tox -e "py38-ansible-{previous,current,next}"
+    rm -rf /vagrant/#{$rolename}/.tox
+    IMAGE="ubuntu" TAG="bionic" tox -e py37-ansible-current
 
-    # pyenv virtualenv 3.6.8 borg-env
-    # ln -s ~/.pyenv/versions/borg-env .
-
+    rm -rf /vagrant/#{$rolename}/.tox
+    IMAGE="debian" TAG="stable" tox -e py37-ansible-current
   EOF
 end
 
@@ -134,11 +117,9 @@ Vagrant.configure(2) do |config|
   # set number of CPUs
   config.vm.provider :virtualbox do |v|
     v.cpus = $cpus
-    # vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    # vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
-  # ubuntu vm
+  # Ubuntu vm
   config.vm.define "bionic64" do |b|
     b.vm.box = "ubuntu/bionic64"
     b.vm.provider :virtualbox do |v|
@@ -154,21 +135,5 @@ Vagrant.configure(2) do |config|
     b.vm.provision :docker
     b.vm.provision "run tests", :type => :shell, :privileged => false, :inline => run_tests("bionic64")
   end
-
-  # config.vm.define "stretch64" do |b|
-  #   b.vm.box = "debian/stretch64"
-  #   b.vm.provider :virtualbox do |v|
-  #     v.memory = 1024 + $wmem
-  #   end
-  #   b.vm.provision "fs init", :type => :shell, :inline => fs_init("vagrant")
-  #   b.vm.provision "packages debianoid", :type => :shell, :inline => packages_debianoid("vagrant")
-  #   b.vm.provision "install pyenv", :type => :shell, :privileged => false, :inline => install_pyenv("stretch64")
-  #   b.vm.provision "install pythons", :type => :shell, :privileged => false, :inline => install_pythons("stretch64")
-  #   b.vm.provision "build env", :type => :shell, :privileged => false, :inline => build_pyenv_venv("stretch64")
-  #   b.vm.provision "install borg", :type => :shell, :privileged => false, :inline => install_borg(true)
-  #   b.vm.provision "install pyinstaller", :type => :shell, :privileged => false, :inline => install_pyinstaller()
-  #   b.vm.provision "build binary with pyinstaller", :type => :shell, :privileged => false, :inline => build_binary_with_pyinstaller("stretch64")
-  #   b.vm.provision "run tests", :type => :shell, :privileged => false, :inline => run_tests("stretch64")
-  # end
 
 end
