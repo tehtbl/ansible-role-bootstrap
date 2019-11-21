@@ -10,8 +10,6 @@ lint:
   options:
     config-file: molecule/default/yaml-lint.yml
 
-# TODO: build own images and put them onto docker hub
-#   image: "robertdebock/ubuntu:latest"
 platforms:
   - name: "${ROLE_NAME:-no_role}-${IMAGE}-${TAG:-no_tag}-${TOX_ENVNAME:-no_tox}"
     image: "${NAMESPACE:-tehtbl}/${IMAGE:-ubuntu}:${TAG:-latest}"
