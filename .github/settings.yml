@@ -1,4 +1,4 @@
 ---
 repository:
-  description: Prepare your Alpine/Ubuntu/Debian System for Ansible.
+  description: Prepare your Debian and Ubuntu Systems for Ansible.
   homepage: https://twitter.com/tehtbl

@@ -35,6 +35,6 @@ script:
   # - tox -e "${PY_VERSION}-ansible-{previous,current,next}" --parallel all
   - tox -e "${PY_VERSION}-ansible-{previous,current,next}"
 
-# notifications:
-#   webhooks: https://galaxy.ansible.com/api/v1/notifications/
-#   email: true
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  email: true
