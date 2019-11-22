@@ -21,7 +21,7 @@ This example is taken from `molecule/resources/playbook.yml`:
   gather_facts: no
 
   roles:
-    - tehtbl.boostrap
+    - tehtbl.bootstrap
 ```
 
 Role Variables
