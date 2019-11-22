@@ -6,6 +6,8 @@
   <img src="https://img.shields.io/ansible/quality/44496"/>
 </a>
 
+<br>
+
 <!-- get id via: ansible-galaxy info tehtbl.skeleton | grep -i "id:" -->
 <a href="https://galaxy.ansible.com/tehtbl/bootstrap">
   <img src="https://img.shields.io/ansible/role/44496"/>
