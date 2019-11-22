@@ -1,24 +1,8 @@
-<a href="https://travis-ci.org/tehtbl/ansible-role-bootstrap">
-  <img src="https://travis-ci.org/tehtbl/ansible-role-bootstrap.svg?branch=master" alt="Build status"/>
-</a>
-
-<a href="https://galaxy.ansible.com/tehtbl/bootstrap">
-  <img src="https://img.shields.io/ansible/quality/44496"/>
-</a>
-
-<br><br>
-
 <!-- get id via: ansible-galaxy info tehtbl.skeleton | grep -i "id:" -->
-<a href="https://galaxy.ansible.com/tehtbl/bootstrap">
-  <img src="https://img.shields.io/ansible/role/44496"/>
-</a>
+<a href="https://galaxy.ansible.com/tehtbl/bootstrap"><img src="https://img.shields.io/ansible/role/44496"/></a> <a href="https://galaxy.ansible.com/tehtbl/bootstrap"><img src="https://img.shields.io/ansible/quality/44496"/></a> <a href="https://travis-ci.org/tehtbl/ansible-role-bootstrap"><img src="https://travis-ci.org/tehtbl/ansible-role-bootstrap.svg?branch=master" alt="Build status"/></a>
 
-<a href="https://galaxy.ansible.com/tehtbl/bootstrap">
-  <img src="https://img.shields.io/ansible/role/d/44496"/>
-</a>
-
-Description
-===========
+Role Description
+================
 
 Prepare your Debian and Ubuntu Systems for Ansible.
 
@@ -75,12 +59,12 @@ Requirements
 Context
 =======
 
-This role is a part of many compatible roles. Have a look at [my GH repos](https://github.com/tehtbl?utf8=%E2%9C%93&tab=repositories&q=ansible-role-&type=&language=) for further information.
+This role is a part of many compatible roles. Have a look at [my other roles](https://github.com/tehtbl?utf8=%E2%9C%93&tab=repositories&q=ansible-role-&type=&language=) for further information.
 
 Compatibility
 =============
 
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [Docker](https://hub.docker.com/) images:
 
 |container|tag|allow_failures|
 |---------|---|--------------|
@@ -155,7 +139,9 @@ GNU General Public License v3.0
 Author Information
 ==================
 
-[@tehtbl](https://github.com/tehtbl)
+GitHub: [@tehtbl](https://github.com/tehtbl)
+
+Twitter: [@tehtbl](https://twitter.com/tehtbl)
 
 Sources
 =======
