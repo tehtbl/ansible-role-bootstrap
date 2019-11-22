@@ -139,9 +139,15 @@ GNU General Public License v3.0
 Author Information
 ==================
 
-GitHub: [@tehtbl](https://github.com/tehtbl)
+<a href="https://github.com/tehtbl">
+  <img src="https://img.shields.io/badge/GitHub-tehtbl-blue/?style=flat&logo=github" />
+</a>
 
-Twitter: [@tehtbl](https://twitter.com/tehtbl)
+<br>
+
+<a href="https://twitter.com/tehtbl">
+  <img src="https://img.shields.io/badge/Twitter-tehtbl-blue/?style=flat&logo=twitter" />
+</a>
 
 Sources
 =======
