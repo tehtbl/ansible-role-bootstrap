@@ -1,4 +1,4 @@
 ---
 repository:
   description: Prepare your Debian and Ubuntu Systems for Ansible.
-  homepage: https://twitter.com/tehtbl
+  homepage: https://github.com/tehtbl/ansible-role-bootstrap
