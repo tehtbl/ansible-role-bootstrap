@@ -1,8 +1,5 @@
 ---
-- name: Converge
+- name: Prepare
   hosts: all
   become: true
   gather_facts: false
-
-  roles:
-    - bootstrap

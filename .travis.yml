@@ -30,8 +30,16 @@ install:
   - pip install tox
 
 script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible-role-${ROLE_NAME} ${ROLE_NAME}
+  - cd ${ROLE_NAME}
+
+  # get current Python version for Tox testing
   - export PY_VERSION="py${TRAVIS_PYTHON_VERSION//.}"
   - echo "${PY_VERSION}"
+
+  # Run Molcule tests with help of Tox
   # - tox -e "${PY_VERSION}-ansible-{previous,current,next}" --parallel all
   - tox -e "${PY_VERSION}-ansible-{previous,current,next}"
 
