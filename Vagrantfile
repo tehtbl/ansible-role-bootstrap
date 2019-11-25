@@ -8,16 +8,16 @@
 #
 $cpus = Integer(ENV.fetch('VMCPUS', '2'))  # create VMs with that many cpus
 $mem = Integer(ENV.fetch('VMMEM', '8192'))  # create VMs with that many cpus
-$rolename = "ansible-role-bootstrap"
+$rolename = "bootstrap"
 
 #
 # provision user
 #
 def fs_init(user)
   return <<-EOF
-    find /vagrant/#{$rolename} -name '__pycache__' -exec rm -rf {} \\; 2> /dev/null
+    find /vagrant/ -name '__pycache__' -exec rm -rf {} \\; 2> /dev/null
 
-    chown -R #{user} /vagrant/#{$rolename}
+    chown -R #{user} /vagrant/ansible-role-#{$rolename}
     touch ~#{user}/.bash_profile ; chown #{user} ~#{user}/.bash_profile
 
     echo 'export LANG=en_US.UTF-8' >> ~#{user}/.bash_profile
@@ -82,9 +82,13 @@ end
 #
 # run tests
 #
-def run_tests(boxname)
+def run_tests(boxname, user)
   return <<-EOF
     . ~/.bash_profile
+
+    sudo chown -R #{user} /vagrant
+
+    mv /vagrant/ansible-role-#{$rolename} /vagrant/#{$rolename}
     cd /vagrant/#{$rolename}
 
     pyenv global 3.7.5rc1
@@ -103,7 +107,7 @@ end
 #
 Vagrant.configure(2) do |config|
   # use rsync to copy content to the folder
-  config.vm.synced_folder ".", "/vagrant/#{$rolename}", :type => "rsync", :rsync__args => ["--verbose", "--archive", "--delete", "-z"], :rsync__chown => false
+  config.vm.synced_folder ".", "/vagrant/ansible-role-#{$rolename}", :type => "rsync", :rsync__args => ["--verbose", "--archive", "--delete", "-z"], :rsync__chown => false
 
   # do not let the VM access . on the host machine via the default shared folder!
   config.vm.synced_folder ".", "/vagrant", disabled: true
@@ -125,15 +129,14 @@ Vagrant.configure(2) do |config|
     b.vm.provider :virtualbox do |v|
       v.memory = $mem
     end
-    b.vm.provision "fs init", :type => :shell, :inline => fs_init("vagrant")
-    b.vm.provision "packages debianoid", :type => :shell, :inline => packages_debianoid("vagrant")
-    b.vm.provision :reload
+    b.vm.provision "fs init", :run => "once", :type => :shell, :inline => fs_init("vagrant")
+    b.vm.provision "packages debianoid", :run => "once", :type => :shell, :inline => packages_debianoid("vagrant")
+    b.vm.provision "install pyenv", :run => "once", :type => :shell, :privileged => false, :inline => install_pyenv("bionic64")
+    b.vm.provision "install pythons", :run => "once", :type => :shell, :privileged => false, :inline => install_pythons("bionic64")
+    b.vm.provision :docker, :run => "once"
+    b.vm.provision :reload, :run => "once"
 
-    b.vm.provision "install pyenv", :type => :shell, :privileged => false, :inline => install_pyenv("bionic64")
-    b.vm.provision "install pythons", :type => :shell, :privileged => false, :inline => install_pythons("bionic64")
-
-    b.vm.provision :docker
-    b.vm.provision "run tests", :type => :shell, :privileged => false, :inline => run_tests("bionic64")
+    b.vm.provision "run tests", :run => "always", :type => :shell, :privileged => false, :inline => run_tests("bionic64", "vagrant")
   end
 
 end
