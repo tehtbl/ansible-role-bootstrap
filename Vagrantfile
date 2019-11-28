@@ -17,7 +17,7 @@ def fs_init(user)
   return <<-EOF
     find /vagrant/ -name '__pycache__' -exec rm -rf {} \\; 2> /dev/null
 
-    chown -R #{user} /vagrant/ansible-role-#{$rolename}
+    chown -R #{user} /vagrant/*
     touch ~#{user}/.bash_profile ; chown #{user} ~#{user}/.bash_profile
 
     echo 'export LANG=en_US.UTF-8' >> ~#{user}/.bash_profile
@@ -88,7 +88,7 @@ def run_tests(boxname, user)
 
     sudo chown -R #{user} /vagrant
 
-    mv /vagrant/ansible-role-#{$rolename} /vagrant/#{$rolename}
+    # mv /vagrant/ansible-role-#{$rolename} /vagrant/#{$rolename}
     cd /vagrant/#{$rolename}
 
     pyenv global 3.7.5rc1
@@ -97,8 +97,8 @@ def run_tests(boxname, user)
     rm -rf /vagrant/#{$rolename}/.tox
     IMAGE="ubuntu" TAG="bionic" tox -e py37-ansible-current
 
-    rm -rf /vagrant/#{$rolename}/.tox
-    IMAGE="debian" TAG="stable" tox -e py37-ansible-current
+    # rm -rf /vagrant/#{$rolename}/.tox
+    # IMAGE="debian" TAG="stable" tox -e py37-ansible-current
   EOF
 end
 
@@ -107,7 +107,12 @@ end
 #
 Vagrant.configure(2) do |config|
   # use rsync to copy content to the folder
-  config.vm.synced_folder ".", "/vagrant/ansible-role-#{$rolename}", :type => "rsync", :rsync__args => ["--verbose", "--archive", "--delete", "-z"], :rsync__chown => false
+  config.vm.synced_folder ".",
+    "/vagrant/#{$rolename}",
+    :type => "rsync",
+    :rsync__args => ["--verbose", "--archive", "--delete", "-z"],
+    :rsync__chown => false,
+    rsync__exclude: [".git/", ".tox/", ".vagrant/"]
 
   # do not let the VM access . on the host machine via the default shared folder!
   config.vm.synced_folder ".", "/vagrant", disabled: true
