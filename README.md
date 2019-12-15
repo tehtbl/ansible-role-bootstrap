@@ -31,23 +31,26 @@ These variables are set in `defaults/main.yml`:
 
 ```yaml
 ---
+# ------------------------------------------------------------------------
 # defaults file for bootstrap
+# ------------------------------------------------------------------------
 
 # The user to use to connect to machines.
-bootstrap_user: root
+bootstrap_user: "{{ ansible_ssh_user }}"
 
 # Installed software to support modules flagged as "preview" (i.e. mysql_db).
 # "yes", "no" or unset are valid.
-bootstrap_preview: no
+bootstrap_preview: true
 
 # Do you want to wait for the host to be available?
-bootstrap_wait_for_host: no
+bootstrap_wait_for_host: false
 
 # The number of seconds you want to wait during connection test before failing.
 bootstrap_timeout: 3
 
 # The number of retries during installation
 bootstrap_retries: 3
+
 ```
 
 Requirements
