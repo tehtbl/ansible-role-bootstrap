@@ -2,6 +2,6 @@
 gid: 44496
 name: bootstrap
 desc: Prepare your Debian and Ubuntu Systems for Ansible.
-reqs: []
+deps: []
 tags:
   - bootstrap

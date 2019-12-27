@@ -3,7 +3,7 @@ galaxy_info:
   author: https://github.com/tehtbl
   role_name: bootstrap
   description: Prepare your Debian and Ubuntu Systems for Ansible.
-  license: GNU General Public License v3.0
+  license: MIT License
   company: None
   min_ansible_version: 2.8
 
@@ -19,7 +19,7 @@ galaxy_info:
 
   galaxy_tags:
     - bootstrap
-    - installer
+    - client
     - server
     - system
     - debian

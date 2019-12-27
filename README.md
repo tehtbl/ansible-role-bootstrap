@@ -1,4 +1,4 @@
-<!-- get id via: ansible-galaxy info tehtbl.skeleton | grep -i "id:" -->
+<!-- get id via: ansible-galaxy info tehtbl.bootstrap | grep -i "id:" -->
 <a href="https://galaxy.ansible.com/tehtbl/bootstrap"><img src="https://img.shields.io/ansible/role/44496"/></a> <a href="https://galaxy.ansible.com/tehtbl/bootstrap"><img src="https://img.shields.io/ansible/quality/44496"/></a> <a href="https://travis-ci.org/tehtbl/ansible-role-bootstrap"><img src="https://travis-ci.org/tehtbl/ansible-role-bootstrap.svg?branch=master" alt="Build status"/></a>
 
 Role Description
@@ -9,19 +9,29 @@ Prepare your Debian and Ubuntu Systems for Ansible.
 Example Playbook
 ================
 
-This example is taken from `molecule/resources/playbook.yml`:
+This example is taken from `molecule/default/playbook.yml` and is tested on each push, pull request and release.
+
 ```yaml
 ---
-# ------------------------------------------------------------------------
-# bootstrap your hosts
-# ------------------------------------------------------------------------
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - tehtbl.bootstrap
+
+```
+
+The machine you are running this on, may need to be prepared, I use this playbook to ensure everything is in place to let the role work.
+
+```yaml
+---
+- name: Prepare
+  hosts: all
+  become: true
+  gather_facts: false
+
 ```
 
 Role Variables
@@ -36,7 +46,7 @@ These variables are set in `defaults/main.yml`:
 # ------------------------------------------------------------------------
 
 # The user to use to connect to machines.
-bootstrap_user: "{{ ansible_ssh_user }}"
+bootstrap_user: root
 
 # Installed software to support modules flagged as "preview" (i.e. mysql_db).
 # "yes", "no" or unset are valid.
@@ -57,7 +67,7 @@ Requirements
 ============
 
 - Access to a repository containing packages, likely on the internet.
-- A recent version of Ansible (Tests run on the current, previous and next release of Ansible).
+- A recent version of Ansible. (Tests run on the current, previous and next release of Ansible.)
 
 Context
 =======
@@ -137,7 +147,7 @@ vagrant up
 License
 =======
 
-GNU General Public License v3.0
+MIT License
 
 Author Information
 ==================
