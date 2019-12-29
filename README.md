@@ -19,7 +19,7 @@ This example is taken from `molecule/default/playbook.yml` and is tested on each
   gather_facts: false
 
   roles:
-    - tehtbl.bootstrap
+    - role: tehtbl.bootstrap
 
 ```
 
