@@ -91,14 +91,15 @@ def run_tests(boxname, user)
     # mv /vagrant/ansible-role-#{$rolename} /vagrant/#{$rolename}
     cd /vagrant/#{$rolename}
 
-    pyenv global 3.7.5rc1
+    pyenv global 3.8.0
     pip3 install tox
+    pip3 install ansible-lint
 
     rm -rf /vagrant/#{$rolename}/.tox
-    IMAGE="ubuntu" TAG="bionic" tox -e py37-ansible-current
+    IMAGE="ubuntu" TAG="bionic" tox -e py38-ansible-current
 
     # rm -rf /vagrant/#{$rolename}/.tox
-    # IMAGE="debian" TAG="stable" tox -e py37-ansible-current
+    # IMAGE="debian" TAG="stable" tox -e py38-ansible-current
   EOF
 end
 
