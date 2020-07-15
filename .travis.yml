@@ -41,7 +41,8 @@ script:
 
   # Run Molcule tests with help of Tox
   # - tox -e "${PY_VERSION}-ansible-{previous,current,next}" --parallel all
-  - tox -e "${PY_VERSION}-ansible-{previous,current,next}"
+  # - tox -e "${PY_VERSION}-ansible-{previous,current,next}"
+  - tox -e "${PY_VERSION}-ansible-{current}"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
