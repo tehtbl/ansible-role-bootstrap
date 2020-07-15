@@ -8,8 +8,8 @@ dependency:
 
 lint: |
   set -e
-  yamllint .
-  ansible-lint .
+  yamllint molecule/default/converge.yml
+  ansible-lint molecule/default/converge.yml
 
 driver:
   name: docker
