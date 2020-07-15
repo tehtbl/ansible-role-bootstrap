@@ -74,7 +74,7 @@ end
 def install_pythons(boxname)
   return <<-EOF
     . ~/.bash_profile
-    pyenv install 3.7.5rc1
+    pyenv install 3.8.0
     pyenv rehash
   EOF
 end

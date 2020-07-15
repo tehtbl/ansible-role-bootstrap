@@ -6,13 +6,13 @@ dependency:
     # ignore-errors: True
     role-file: requirements.yml
 
+lint: |
+  set -e
+  yamllint molecule/default/converge.yml
+  ansible-lint molecule/default/converge.yml
+
 driver:
   name: docker
-
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/default/yaml-lint.yml
 
 platforms:
   - name: "${ROLE_NAME:-no_role_name}-${IMAGE}-${TAG:-no_tag}-${TOX_ENVNAME:-no_tox}"
@@ -25,13 +25,10 @@ platforms:
 
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
-
-scenario:
-  name: default
+  config_options:
+    defaults:
+      stdout_callback: yaml
+      bin_ansible_callbacks: yes
 
 verifier:
-  name: testinfra
-  lint:
-    name: flake8
+  name: ansible
