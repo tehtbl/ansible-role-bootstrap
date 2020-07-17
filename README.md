@@ -9,7 +9,7 @@ Prepare your Debian and Ubuntu Systems for Ansible.
 Example Playbook
 ================
 
-This example is taken from `molecule/default/playbook.yml` and is tested on each push, pull request and release.
+This example is taken from `molecule/default/converge.yml` and is tested on each push, pull request and release.
 
 ```yaml
 ---
@@ -158,4 +158,4 @@ Author Information
 Sources
 =======
 
-This work is based on the great work of many people, e.g. [robertdebock](https://github.com/robertdebock) and [geerlingguy](https://github.com/geerlingguy). Thank you!
+This work is based on the great work of many people, e.g. [Robert de Bock](https://github.com/robertdebock), [Jeff Geerling](https://github.com/geerlingguy) and [Thomas Waldmann](https://github.com/ThomasWaldmann). Thank you!

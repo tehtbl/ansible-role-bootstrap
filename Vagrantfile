@@ -7,7 +7,7 @@
 # variables
 #
 $cpus = Integer(ENV.fetch('VMCPUS', '2'))  # create VMs with that many cpus
-$mem = Integer(ENV.fetch('VMMEM', '8192'))  # create VMs with that many cpus
+$mem = Integer(ENV.fetch('VMMEM', '4096'))  # create VMs with that many cpus
 $rolename = "bootstrap"
 
 #
