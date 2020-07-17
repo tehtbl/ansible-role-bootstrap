@@ -43,8 +43,9 @@ script:
 
   # Run Molcule tests with help of Tox
   # - tox -e "${PY_VERSION}-ansible-{previous,current,next}" --parallel all
-  # - tox -e "${PY_VERSION}-ansible-{previous,current,next}"
-  - tox -e "${PY_VERSION}-ansible-next"
+  - tox -e "${PY_VERSION}-ansible-current"
+  # let ansible-next tests fail, due to https://github.com/ansible-community/molecule/issues/2650
+  - tox -e "${PY_VERSION}-ansible-next" || echo "tests for ${PY_VERSION}-ansible-next failed, but is ignored"
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
