@@ -84,8 +84,9 @@ This role has been tested on these [Docker](https://hub.docker.com/) images:
 |debian|stable|no|
 |debian|testing|no|
 |debian|unstable|yes|
-|ubuntu|xenial|no|
+|ubuntu|xenial|yes|
 |ubuntu|bionic|no|
+|ubuntu|focal|no|
 |ubuntu|devel|yes|
 
 This role has been tested on these Ansible versions:
